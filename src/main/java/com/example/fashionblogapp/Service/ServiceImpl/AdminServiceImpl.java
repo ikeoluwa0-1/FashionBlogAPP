@@ -52,6 +52,7 @@ public class AdminServiceImpl implements AdminService{
         System.out.println(blogPostDTO);
         BlogPost blogPost = new BlogPost();
         if(httpSession.getAttribute("admin_id") == null){
+
             throw new RuntimeException("Please, login first!");
         }
         if(blogPostRepository.existsBlogPostById(blogPost.getId())){

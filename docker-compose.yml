@@ -1,18 +1,38 @@
-version: '3.1'
+version: "3.7"
 services:
-  app:
-    container_name: docker-blog-project
-    image: docker-blog-project
-    build: ./
+  server:
+    build: .
+    restart: always
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
-      - postgresqldb
-  postgresqldb:
-      image: mydocker
-      ports:
-        - "5433:5432"
-      environment:
-        - POSTGRES_PASSWORD=My postgresql
-        - POSTGRES_USER=postgres
-        - POSTGRES_DB=DockerBlog
+      - mysqldb
+  mysqldb:
+    platform: linux/x86_64
+    image: "mysql:8.0.29"
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: fashiondb
+      MYSQL_ROOT_PASSWORD: root
+
+
+#version: '3.1'
+#services:
+#  app:
+#    container_name: docker-blog-project
+#    image: docker-blog-project
+#    build: ./
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mypostgresdb
+#  mypostgresdb:
+#      image: postgres
+#      ports:
+#        - "5433:5432"
+#      environment:
+#        - POSTGRES_PASSWORD=postgresql
+#        - POSTGRES_USER=postgres
+#        - POSTGRES_DB=DockerBlog

@@ -56,10 +56,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Users login(String email, String password) {
 
-        if (userRepository.findByEmailAndPassword(email, password) == null) {
+        if (userRepository.findUsersByEmailAndPassword(email, password) == null) {
             throw new RuntimeException("Invalid Username and/or Password");
         }
-        Users users = userRepository.findByEmailAndPassword(email, password);
+        Users users = userRepository.findUsersByEmailAndPassword(email, password);
         httpSession.setAttribute("users", users.getId());
 
         return users;

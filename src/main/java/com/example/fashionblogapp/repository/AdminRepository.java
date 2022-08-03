@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
-        Admin findAdminByEmailAndPassword (String email, String password);
-    @Query(value = "SELECT * FROM Admin WHERE email = ? AND password = ?", nativeQuery = true)
-    Admin findByEmailAndPassword(String email, String password);
+
+    @Query(value = "SELECT admin FROM Admin  admin  WHERE admin.email = ?1 AND admin.password = ?2")
+    Admin findByEmailAndPassword (String email, String password);
    Admin findByEmail(String email);
 }
